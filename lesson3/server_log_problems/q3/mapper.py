@@ -11,19 +11,14 @@
 # %>s is the status code that the server sends back to the client. You will see see mostly status codes 200 (OK - The request has succeeded), 304 (Not Modified) and 404 (Not Found). See more information on status codes in W3C.org
 # %b is the size of the object returned to the client, in bytes. It will be "-" in case of status code 304.
 
+#!/usr/bin/env python
+
 import sys
 import re
 
-def mapper():
-    for line in sys.stdin:
-        data = line.strip().split(" ")
-        if len(data) == 10:
-            ip_address, identity, username, datetime, timezone, method, path, proto, status, size = data
-            cleaned_path = re.sub(r"^http://www.the-associates.co.uk", '', path)
-            print cleaned_path
-
-def main():
-    mapper()
-
-main()
-
+for line in sys.stdin:
+    data = line.strip().split(" ")
+    if len(data) == 10:
+        ip_address, identity, username, datetime, timezone, method, path, proto, status, size = data
+        cleaned_path = re.sub(r"^http://www.the-associates.co.uk", '', path)
+        print cleaned_path
